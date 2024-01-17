@@ -1,0 +1,29 @@
+﻿@page "/"
+@using NoorasKalender.Logic.Classes
+@inject BusinessLogic bl
+@inject NavigationManager NavigationManager
+
+<div class="christmas-banner">
+    Nooras Julkalender
+</div>
+
+<div class="calendar">
+    @foreach (var day in bl.GetDays())
+    {
+        <div class="day @(day.CanOpen ? "" : "disabled")"
+             @onclick="day.CanOpen ? (() => OpenDay(day.Id)) : (Action)null">
+            <img src="@day.CurrentImageUrl" alt="Day @day.Id" />
+        </div>
+    }
+</div>
+
+@code {
+    private void OpenDay(int dayId)
+    {
+        var day = bl.GetDays().SingleOrDefault(d => d.Id == dayId);
+        if (day?.CanOpen == true)
+        {
+            NavigationManager.NavigateTo($"/day/{dayId}");
+        }
+    }
+}

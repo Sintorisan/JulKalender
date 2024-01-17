@@ -1,0 +1,238 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap');
+
+/* Base styles for body and text elements */
+html, body {
+    font-family: 'Mountains of Christmas', sans-serif;
+    background-color: #025868; /* Updated background color */
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url(../Img/Background1.jpg);
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-attachment: fixed; /* Keep the background image fixed in place */
+}
+
+/* Global link color */
+a, .btn-link {
+    color: #0071c1;
+}
+
+/* Button styling */
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Calendar grid container */
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 4 items per row */
+    gap: 10px; /* Adjust the gap size as needed */
+    padding: 10px; /* Add some padding around the grid */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
+    width: 100%; /* Full width of its container */
+    max-width: 600px; /* Maximum width of the calendar */
+}
+
+/* Individual day cell styling */
+.day {
+    border-radius: 5px;
+    padding: 10px; /* Reduced padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1; /* Makes the item square */
+}
+
+    .day img {
+        max-width: 100%; /* Makes the image responsive */
+        max-height: 100%; /* Limit image height to fit the container */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+
+/* Styling for the day when it's opened */
+.opened-day {
+    background-color: #444;
+    border: 1px solid #555;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+/* Validation and error messages styling */
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid, .validation-message {
+    color: red;
+}
+
+/* Error UI container */
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+/* Error boundary styling */
+.blazor-error-boundary {
+    background: #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred.";
+    }
+
+/* Styling for safe area in mobile devices */
+.status-bar-safe-area {
+    display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+    .status-bar-safe-area {
+        display: flex;
+        position: sticky;
+        top: 0;
+        height: env(safe-area-inset-top);
+        background-color: #f7f7f7;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .flex-column, .navbar-brand {
+        padding-left: env(safe-area-inset-left);
+    }
+}
+
+.opened-day-container {
+    background-image: url(../Img/letter.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 80%; /* Reduced width */
+    max-width: 500px; /* Adjust maximum width as needed */
+    margin: 2rem auto; /* Centers the container with margin on top and bottom */
+    padding: 20px; /* Inner padding - adjust based on your content */
+    color: #333;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px; /* Optional: for rounded corners */
+}
+
+
+.opened-day-title {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #C8102E; /* Adjust color as needed */
+}
+
+.riddle-question {
+    font-size: 1.7em;
+    margin-bottom: 30px;
+}
+
+.opened-day-title, .riddle-question {
+    margin-bottom: 1rem; /* Adjust spacing */
+}
+
+.answer-buttons {
+    margin-top: 2rem; /* Space between the letter and the buttons */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    background-color: #025868; /* Button color */
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 2em; /* Adjust font size as needed */
+}
+
+
+.btn-primary {
+    background-color: #E8C547; /* Gold color */
+}
+
+.btn-success {
+    background-color: #28a745; /* Green */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Red */
+}
+
+.loading-message {
+    color: #E8C547; /* Gold color */
+    text-align: center;
+    font-size: 1.5em;
+}
+
+/* Add media query for responsiveness on smaller screens */
+@media (max-width: 768px) {
+    .answer-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 1018px) {
+    .opened-day-container {
+        width: 90%; /* Adjust for smaller screens */
+    }
+}
+
+.christmas-banner {
+    background-color: #C8102E; /* Christmas red */
+    color: white; /* Text color */
+    text-align: center; /* Center the text inside the banner */
+    padding: 10px 0; /* Padding above and below the text */
+    font-size: 24px; /* Font size of the text */
+    font-weight: bold; /* Make the text bold */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow for depth */
+    position: sticky; /* Optional: Makes the banner stick to the top when scrolling */
+    top: 0; /* Works with position: sticky */
+    z-index: 1000; /* Ensures the banner stays on top of other content */
+    border-radius: 10px;
+}
+
+/* Optional: Adjust the banner for smaller screens */
+@media (max-width: 768px) {
+    .christmas-banner {
+        font-size: 24px; /* Smaller font size on smaller screens */
+    }
+}

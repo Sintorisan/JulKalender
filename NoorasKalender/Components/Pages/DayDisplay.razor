@@ -1,0 +1,64 @@
+﻿@page "/day/{daycounter:int}"
+@using NoorasKalender.Common.Classes
+@using NoorasKalender.Logic.Classes
+@inject BusinessLogic bl
+@inject NavigationManager NavigationManager
+
+@if (Day != null)
+{
+    <div class="opened-day-container mt-5">
+        <h3 class="opened-day-title">December @Day.Id</h3>
+        <p class="riddle-question">@Day.Riddle.Question</p>
+    </div>
+    <div class="answer-buttons">
+        @foreach (var a in Day.Riddle.Answers._answers)
+        {
+            <button class="btn @GetButtonClass(a)" @onclick="() => CheckAnswer(a)">@a</button>
+        }
+    </div>
+}
+else
+{
+    <p class="loading-message">Loading...</p>
+}
+
+@code {
+    [Parameter]
+    public int DayCounter { get; set; }
+
+    private Day Day { get; set; }
+
+    private Dictionary<string, string> buttonColors = new Dictionary<string, string>();
+
+    protected override void OnInitialized()
+    {
+        Day = bl.GetDays().SingleOrDefault(d => d.Id == DayCounter);
+        foreach (var answer in Day.Riddle.Answers._answers)
+        {
+            buttonColors[answer] = "primary";
+        }
+    }
+
+    string GetButtonClass(string answer)
+    {
+        return buttonColors.ContainsKey(answer) ? $"btn-{buttonColors[answer]}" : "btn-primary";
+    }
+
+    async Task CheckAnswer(string answer)
+    {
+        Day.Riddle.UserAnswer = answer;
+        if (Day.Riddle.RightOrFalse)
+        {
+            buttonColors[answer] = "success";
+            await Task.Delay(2000);
+            NavigationManager.NavigateTo("/");
+
+        }
+        else
+        {
+            buttonColors[answer] = "danger";
+        }
+        StateHasChanged();
+
+    }
+}
